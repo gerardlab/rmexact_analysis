@@ -1,9 +1,3 @@
-# Number of threads to use for multithreaded computing. This must be
-# specified in the command-line shell; e.g., to use 8 threads, run
-# command
-#
-#  R CMD BATCH '--args nc=8' sims.R
-#
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) == 0) {
   nc <- 1
@@ -42,5 +36,3 @@ nmat <- t(apply(genomat, 1, get_nvec, ploidy = 4))
 
 ## Write everything
 saveRDS(object = nmat, file = "./output/sturg/nmat_updog.RDS")
-saveRDS(object = nmat, file = "./output/sturg/nmat_delo.RDS")
-saveRDS(object = uout, file = "./output/sturg/sturg_updog.RDS")
