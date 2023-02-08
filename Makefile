@@ -5,7 +5,7 @@ rexec = R CMD BATCH --no-save --no-restore
 all : sturg
 
 .PHONY : sturg
-sturg : ./output/sturg/nmat_updog.RDS
+sturg : ./output/sturg/sims_realdata.RDS
 
 ./data/sturg/8n_12n_sturgeon_readCounts.rda :
 	mkdir -p ./data/sturg
@@ -16,3 +16,8 @@ sturg : ./output/sturg/nmat_updog.RDS
 	mkdir -p ./output/rout
 	mkdir -p ./output/sturg
 	$(rexec) '--args nc=$(nc)' $< ./output/rout/$(basename $(notdir $<)).Rout
+
+./output/sturg/sims_realdata.RDS : ./analysis/real_fit.R ./output/sturg/nmat_updog.RDS
+	mkdir -p ./output/rout
+	mkdir -p ./output/sturg
+	$(rexec) $< ./output/rout/$(basename $(notdir $<)).Rout

@@ -1,10 +1,10 @@
 #Null Simulation study with Sturg Data
 library(rmexact)
 
-realdata <- readRDS("../sturg/nmat_updog.RDS")
+realdata <- readRDS("./output/sturg/nmat_updog.RDS")
 realdata <- as.data.frame.matrix(realdata)
 colnames(realdata) <- c('V1','V2','V3','V4', 'V5')
-realdata$exact_pval <- NA 
+realdata$exact_pval <- NA
 realdata$like_pval <- NA
 realdata$chisqr_pval <- NA
 realdata$splitlrt_pval <- NA
@@ -17,5 +17,5 @@ for(i in seq_len(nrow(realdata))) {
   realdata$like_pval[[i]] <- hwep::rmlike(nvec = as.vector(result))$p_rm
   realdata$splitlrt_pval[[i]] <- rmexact::rmslrt(nvec = result, sprop = 0.5)$pval
 }
-saveRDS(object = realdata, file = "../sims_realdata.RDS")
+saveRDS(object = realdata, file = "./output/sturg/sims_realdata.RDS")
 
