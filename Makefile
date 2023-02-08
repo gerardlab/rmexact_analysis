@@ -5,7 +5,7 @@ rexec = R CMD BATCH --no-save --no-restore
 all : sturg
 
 .PHONY : sturg
-sturg : $(sturg_n)
+sturg : ./output/sturg/nmat_updog.RDS
 
 ./data/sturg/8n_12n_sturgeon_readCounts.rda :
 	mkdir -p ./data/sturg
