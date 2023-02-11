@@ -1,7 +1,6 @@
 #QQ plots from Null Simulation study
 library(tidyverse)
 library(rmexact)
-require(qqplotr)
 
 paramdf <- readRDS("./output/null/sims_out.RDS")
 

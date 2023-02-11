@@ -1,7 +1,5 @@
 #QQ plots from Alternative simulation
 library(tidyverse)
-library(ggplot2)
-library(tidyr)
 
 paramdf0 <- readRDS("./output/alt/sims_alt.RDS")
 

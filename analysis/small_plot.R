@@ -1,11 +1,9 @@
 #QQ plots from Small Sample Simulation study
 library(tidyverse)
 library(rmexact)
-library(devtools)
-library(qqplotr)
 
-sims_samp1 <- readRDS("../output/sims_samp1.RDS")
-sims_samp2 <- readRDS("../output/sims_samp2.RDS")
+sims_samp1 <- readRDS("./output/small/sims_samp1.RDS")
+sims_samp2 <- readRDS("./output/small/sims_samp2.RDS")
 
 #Exact pval
 ggplot(sims_samp1) +
@@ -93,11 +91,11 @@ ggplot(sims_samp2) +
   ylab("Count") -> smallsplitlrthist2
 
 #PDF
-ggsave(filename = "smallexact1.pdf", plot = smallexacthist1, height = 6, width = 6, family = "Times")
-ggsave(filename = "smallexact2.pdf", plot = smallexacthist2, height = 6, width = 6, family = "Times")
-ggsave(filename = "smalllike1.pdf", plot = smalllikehist1, height = 6, width = 6, family = "Times")
-ggsave(filename = "smalllike2.pdf", plot = smalllikehist2, height = 6, width = 6, family = "Times")
-ggsave(filename = "smallchisqr1.pdf", plot = smallchisqrhist1, height = 6, width = 6, family = "Times")
-ggsave(filename = "smallchisqr2.pdf", plot = smallchisqrhist2, height = 6, width = 6, family = "Times")
-ggsave(filename = "smallsplitlrt1.pdf", plot = smallsplitlrthist1, height = 6, width = 6, family = "Times")
-ggsave(filename = "smallsplitlrt2.pdf", plot = smallsplitlrthist2, height = 8, width = 6, family = "Times")
+ggsave(filename = "./output/small/smallexact1.pdf", plot = smallexacthist1, height = 6, width = 6, family = "Times")
+ggsave(filename = "./output/small/smallexact2.pdf", plot = smallexacthist2, height = 6, width = 6, family = "Times")
+ggsave(filename = "./output/small/smalllike1.pdf", plot = smalllikehist1, height = 6, width = 6, family = "Times")
+ggsave(filename = "./output/small/smalllike2.pdf", plot = smalllikehist2, height = 6, width = 6, family = "Times")
+ggsave(filename = "./output/small/smallchisqr1.pdf", plot = smallchisqrhist1, height = 6, width = 6, family = "Times")
+ggsave(filename = "./output/small/smallchisqr2.pdf", plot = smallchisqrhist2, height = 6, width = 6, family = "Times")
+ggsave(filename = "./output/small/smallsplitlrt1.pdf", plot = smallsplitlrthist1, height = 6, width = 6, family = "Times")
+ggsave(filename = "./output/small/smallsplitlrt2.pdf", plot = smallsplitlrthist2, height = 8, width = 6, family = "Times")

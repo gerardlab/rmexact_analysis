@@ -2,7 +2,7 @@
 library(rmexact)
 
 data <- as.data.frame(hwep:::all_multinom(n = 5, k = 5))
-data$exact_pval <- NA 
+data$exact_pval <- NA
 data$like_pval <- NA
 data$chisqr_pval <- NA
 data$splitlrt_pval <- NA
@@ -15,10 +15,10 @@ for(i in seq_len(nrow(data))) {
   data$splitlrt_pval[[i]] <- rmexact::rmslrt(nvec = result, sprop = 0.5)$pval
 }
 
-saveRDS(object = data, file = "../hwe_karene/output/sims_samp1.RDS")
+saveRDS(object = data, file = "./output/small/sims_samp1.RDS")
 
 data1 <- as.data.frame(hwep:::all_multinom(n = 10, k = 5))
-data1$exact_pval <- NA 
+data1$exact_pval <- NA
 data1$like_pval <- NA
 data1$chisqr_pval <- NA
 data1$splitlrt_pval <- NA
@@ -31,5 +31,5 @@ for(i in seq_len(nrow(data1))) {
   data1$splitlrt_pval[[i]] <- rmexact::rmslrt(nvec = result, sprop = 0.5)$pval
 }
 
-saveRDS(object = data1, file = "../hwe_karene/output/sims_samp2.RDS")
+saveRDS(object = data1, file = "./output/small/sims_samp2.RDS")
 
