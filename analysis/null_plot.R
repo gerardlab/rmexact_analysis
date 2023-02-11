@@ -3,7 +3,7 @@ library(tidyverse)
 library(rmexact)
 require(qqplotr)
 
-paramdf <- readRDS("../output/sims_out.RDS")
+paramdf <- readRDS("./output/null/sims_out.RDS")
 
 #Exact pval
 paramdf %>%
@@ -19,7 +19,7 @@ paramdf %>%
   xlab("Theoretical Quantiles") +
   ylab("Observed P-values") -> exactplot
 
-ggsave(filename = "exact_null.pdf", plot = exactplot, height = 6, width = 6, family = "Times")
+ggsave(filename = "./output/null/exact_null.pdf", plot = exactplot, height = 6, width = 6, family = "Times")
 
 #Likelihood P-values
 paramdf %>%
@@ -36,7 +36,7 @@ paramdf %>%
   scale_y_log10(limits = c(0.001, 1)) +
   xlab("Theoretical Quantiles") +
   ylab("Observed P-values") -> lrtplot
-ggsave(filename = "likelihood_null.pdf", plot = lrtplot, height = 6, width = 6, family = "Times")
+ggsave(filename = "./output/null/likelihood_null.pdf", plot = lrtplot, height = 6, width = 6, family = "Times")
 
 #Chi-squared P-values
 paramdf %>%
@@ -54,7 +54,7 @@ paramdf %>%
   xlab("Theoretical Quantiles") +
   ylab("Observed P-values") -> chisqrplot
 
-ggsave(filename = "chi_null.pdf", plot = chisqrplot, height = 6, width = 6, family = "Times")
+ggsave(filename = "./output/null/chi_null.pdf", plot = chisqrplot, height = 6, width = 6, family = "Times")
 
 
 #Split Likelihood Ratio Test
@@ -64,11 +64,11 @@ paramdf %>%
   ggplot(mapping = aes(sample = splitlrt_pval))+
   geom_qq(distribution = stats::qunif) +
   facet_grid(p2 ~ n) +
-  geom_abline() + 
+  geom_abline() +
   ggtitle("Split Likelihood Ratio under the Null") +
   theme_bw() +
   theme(strip.background = element_rect(fill = "white")) +
   xlab("Theoretical Quantiles") +
   ylab("Observed P-values") -> splitplot
 
-ggsave(filename = "slrt_null.pdf", plot = splitplot, height = 6, width = 6, family = "Times")
+ggsave(filename = "./output/null/slrt_null.pdf", plot = splitplot, height = 6, width = 6, family = "Times")

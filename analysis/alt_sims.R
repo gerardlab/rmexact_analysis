@@ -2,14 +2,14 @@ plist <- list(rep(0.2, 5),
               c(0.5, 0, 0, 0, 0.5),
               c(0.1, 0.2, 0.4, 0.2, 0.1),
               c(0.1, 0.1, 0.2, 0.3, 0.3))
-        
+
 
 nvec <- c(10, 100, 1000)
 seedvec <- seq_len(100)
 paramdf0 <- expand.grid(p = plist,
                        n = nvec,
                        seed = seedvec)
-paramdf0$exact_pval <- NA 
+paramdf0$exact_pval <- NA
 paramdf0$like_pval <- NA
 paramdf0$chisqr_pval <- NA
 paramdf0$splitlrt_pval <- NA
@@ -26,5 +26,5 @@ for(i in seq_len(nrow(paramdf0))) {
   paramdf0$splitlrt_pval[[i]] <- rmexact::rmslrt(nvec = result, sprop = 0.5)$pval
 }
 
-saveRDS(object = paramdf0, file = "../hwe_karene/output/sims_alt.RDS")
+saveRDS(object = paramdf0, file = ".output/alt/sims_alt.RDS")
 

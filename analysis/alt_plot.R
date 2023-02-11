@@ -1,9 +1,9 @@
-#QQ plots from Alternative simulation 
+#QQ plots from Alternative simulation
 library(tidyverse)
 library(ggplot2)
 library(tidyr)
 
-paramdf0 <- readRDS("../output/sims_alt.RDS")
+paramdf0 <- readRDS("./output/alt/sims_alt.RDS")
 
 #Exact pvalue
 paramdf0 %>%
@@ -19,7 +19,7 @@ paramdf0 %>%
   xlab("Theoretical Quantiles") +
   ylab("Observed P-values") -> exactplot2
 
-ggsave(filename = "exact_alt.pdf", plot = exactplot2, height = 6, width = 6, family = "Times")
+ggsave(filename = "./output/alt/exact_alt.pdf", plot = exactplot2, height = 6, width = 6, family = "Times")
 
 #Likelihood Pvalue
 paramdf0 %>%
@@ -35,7 +35,7 @@ paramdf0 %>%
   xlab("Theoretical Quantiles") +
   ylab("Observed P-values") -> lrtplot2
 
-ggsave(filename = "likelihood_alt.pdf", plot = lrtplot2, height = 6, width = 6, family = "Times")
+ggsave(filename = "./output/alt/likelihood_alt.pdf", plot = lrtplot2, height = 6, width = 6, family = "Times")
 
 #Chi-squared P-values
 paramdf0 %>%
@@ -50,7 +50,7 @@ paramdf0 %>%
   coord_cartesian(xlim = c(0.0001, 1), ylim = c(0.0001, 1)) +
   labs(x = "Theoretical Quantiles", y = "Observed P-values") -> chisqrplot2
 
-ggsave(filename = "chisqr_alt.pdf", plot = chisqrplot2, height = 6, width = 6, family = "Times")
+ggsave(filename = "./output/alt/chisqr_alt.pdf", plot = chisqrplot2, height = 6, width = 6, family = "Times")
 
 #Split P-values
 paramdf0 %>%
@@ -65,5 +65,5 @@ paramdf0 %>%
   xlab("Theoretical Quantiles") +
   ylab("Observed P-values") -> splitplot2
 
-ggsave(filename = "split_alt.pdf", plot = splitplot2, height = 6, width = 6, family = "Times")
+ggsave(filename = "./output/alt/split_alt.pdf", plot = splitplot2, height = 6, width = 6, family = "Times")
 

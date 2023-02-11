@@ -9,7 +9,7 @@ seedvec <- seq_len(100)
 paramdf <- expand.grid(p = plist,
                        n = nvec,
                        seed = seedvec)
-paramdf$exact_pval <- NA 
+paramdf$exact_pval <- NA
 paramdf$like_pval <- NA
 paramdf$chisqr_pval <- NA
 paramdf$splitlrt_pval <- NA
@@ -26,7 +26,7 @@ for(i in seq_len(nrow(paramdf))) {
   paramdf$splitlrt_pval[[i]] <- rmexact::rmslrt(nvec = result, sprop = 0.5)$pval
 }
 
-saveRDS(object = paramdf, file = "../output/sims_out.RDS")
+saveRDS(object = paramdf, file = "./output/null/sims_out.RDS")
 
 #Save this table since it has all the type I error
 library(tidyr)
@@ -38,5 +38,5 @@ paramdf %>%
   dplyr::summarize(t1e = mean(pval < 0.05, na.rm = TRUE)) %>%
   print(n = 60) -> paramdftype1
 
-saveRDS(object = paramdftype1, file = "../output/sims_outtype1.RDS")
+saveRDS(object = paramdftype1, file = "./output/null/sims_outtype1.RDS")
 
