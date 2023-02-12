@@ -26,5 +26,5 @@ for(i in seq_len(nrow(paramdf0))) {
   paramdf0$splitlrt_pval[[i]] <- rmexact::rmslrt(nvec = result, sprop = 0.5)$pval
 }
 
-saveRDS(object = paramdf0, file = ".output/alt/sims_alt.RDS")
+saveRDS(object = paramdf0, file = "./output/alt/sims_alt.RDS")
 
