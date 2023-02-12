@@ -93,7 +93,7 @@ small : $(small_plots)
 	mkdir -p ./output/small
 	$(rexec) $< ./output/rout/$(basename $(notdir $<)).Rout
 
-$(small_plots) : ./analysis/small_plot ./output/small/sims_samp1.RDS ./output/small/sims_samp2.RDS
+$(small_plots) : ./analysis/small_plot.R ./output/small/sims_samp1.RDS ./output/small/sims_samp2.RDS
 	mkdir -p ./output/rout
 	mkdir -p ./output/small
 	$(rexec) $< ./output/rout/$(basename $(notdir $<)).Rout
