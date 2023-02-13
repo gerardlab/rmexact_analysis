@@ -26,12 +26,15 @@ pardf %>%
   pivot_longer(cols = c("Exact", "LRT", "Chi-squared", "SLRT"),
                names_to = "Method",
                values_to = "P-value") %>%
+  mutate(n = str_c("n = ", n),
+         n = parse_factor(n, levels = c("n = 5", "n = 10")),
+         Method = parse_factor(Method, levels = c("LRT", "Chi-squared", "SLRT", "Exact"))) %>%
   ggplot(aes(x = `P-value`)) +
   geom_histogram(color = "black", fill = "grey", bins = 20) +
-  facet_grid(n ~ Method, scales = "free") +
+  facet_wrap(Method ~ n, scales = "free", ncol = 2) +
   theme_bw() +
   theme(strip.background = element_rect(fill = "white")) ->
   pl
 
-ggsave(filename = "./output/small/small_hist.pdf", plot = pl)
+ggsave(filename = "./output/small/small_hist.pdf", plot = pl, height = 6, width = 5)
 
