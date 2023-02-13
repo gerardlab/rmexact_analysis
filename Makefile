@@ -16,15 +16,6 @@ alt_plots = ./output/alt/exact_alt.pdf \
             ./output/alt/chisqr_alt.pdf \
             ./output/alt/split_alt.pdf
 
-small_plots = ./output/small/smallexact1.pdf \
-              ./output/small/smallexact2.pdf \
-              ./output/small/smalllike1.pdf \
-              ./output/small/smalllike2.pdf \
-              ./output/small/smallchisqr1.pdf \
-              ./output/small/smallchisqr2.pdf \
-              ./output/small/smallsplitlrt1.pdf \
-              ./output/small/smallsplitlrt2.pdf
-
 .PHONY : all
 all : sturg alt_sims null_sims small
 
@@ -86,14 +77,14 @@ $(alt_plots) : ./analysis/alt_plot.R ./output/alt/sims_alt.RDS
 ## Small Sample Size Data Analysis --------------------------------
 
 .PHONY: small
-small : $(small_plots)
+small : ./output/small/small_hist.pdf
 
 ./output/small/sims_samp1.RDS ./output/small/sims_samp2.RDS : ./analysis/small_sims.R
 	mkdir -p ./output/rout
 	mkdir -p ./output/small
 	$(rexec) $< ./output/rout/$(basename $(notdir $<)).Rout
 
-$(small_plots) : ./analysis/small_plot.R ./output/small/sims_samp1.RDS ./output/small/sims_samp2.RDS
+./output/small/small_hist.pdf : ./analysis/small_plot.R ./output/small/sims_samp1.RDS ./output/small/sims_samp2.RDS
 	mkdir -p ./output/rout
 	mkdir -p ./output/small
 	$(rexec) $< ./output/rout/$(basename $(notdir $<)).Rout
