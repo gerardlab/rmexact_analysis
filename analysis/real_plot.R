@@ -52,4 +52,54 @@ realdata %>%
   xlab("Theoretical Quantiles") +
   ylab("Observed P-values") -> splitlrtplotrealdata
 
+realdata %>%
+  ggplot(mapping = aes(sample = splitlrt_pval)) +
+  geom_qq(distribution = stats::qunif) +
+  facet_grid()
+  geom_abline() +
+  ggtitle("Split Likelihood P-value") +
+  theme_bw() +
+  theme(strip.background = element_rect(fill = "white")) +
+  xlab("Theoretical Quantiles") +
+  ylab("Observed P-values")
+  
+
+#You generate a data frame with two columns. One contains the names of the test
+#and the other one contains the p-values
+
+newtab <- expand.grid(tests = "exactpvalue",
+                        values = extractedexactpval)
+newtab2 <- expand.grid(tests = "chisqrpvalue",
+                       values = extractedchisqrpval)
+newtab3 <- expand.grid(tests = "likelihoodpvalue",
+                       values = extractedlikelihoodpval)
+newtab4 <- expand.grid(tests = "splitlrtpvalue",
+                       values = extractedsplitlrtpval)
+combinedtab <- rbind(newtab, newtab2, newtab3, newtab4)
+
+combinedtab %>%
+   ggplot(mapping = aes(sample = values)) +
+   geom_qq(distribution = stats::qunif) +
+   facet_wrap(~ tests) +
+   geom_abline() +
+   ggtitle("P-values") +
+   theme_bw() +
+   theme(strip.background = element_rect(fill = "white")) +
+   xlab("Theoretical Quantiles") +
+   ylab("Observed P-values")
+
+#Likelihood Pvalue
+paramdf0 %>%
+  dplyr::mutate(p2 = as.character(p)) %>%
+  ggplot2::ggplot(mapping = aes(sample = like_pval))+
+  ggplot2::geom_qq(distribution = stats::qunif) +
+  ggplot2::facet_grid(p2 ~ n) +
+  ggplot2::geom_abline() +
+  ggplot2::ggtitle("Likelihood P-value under Alternative Hypothesis") +
+  theme_bw() +
+  theme(strip.background = element_rect(fill = "white")) +
+  coord_cartesian(xlim = c(0.0001, 1), ylim = c(0.0001, 1)) +
+  xlab("Theoretical Quantiles") +
+  ylab("Observed P-values") -> lrtplot2
+
 ggsave(filename = "./output/sturg/splitlrtdata.pdf", plot = splitlrtplotrealdata, height = 6, width = 6, family = "Times")

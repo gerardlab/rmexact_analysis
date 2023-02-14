@@ -31,10 +31,9 @@ paramdf %>%
   ggtitle("Likelihood P-value under the Null") +
   theme_bw() +
   theme(strip.background = element_rect(fill = "white")) +
-  scale_x_log10(limits = c(0.001, 1)) +
-  scale_y_log10(limits = c(0.001, 1)) +
   xlab("Theoretical Quantiles") +
   ylab("Observed P-values") -> lrtplot
+
 ggsave(filename = "./output/null/likelihood_null.pdf", plot = lrtplot, height = 6, width = 6, family = "Times")
 
 #Chi-squared P-values
@@ -48,8 +47,6 @@ paramdf %>%
   ggtitle("Chi-squared P-value under the Null") +
   theme_bw() +
   theme(strip.background = element_rect(fill = "white")) +
-  scale_x_log10(limits = c(0.001, 1)) +
-  scale_y_log10(limits = c(0.001, 1)) +
   xlab("Theoretical Quantiles") +
   ylab("Observed P-values") -> chisqrplot
 
