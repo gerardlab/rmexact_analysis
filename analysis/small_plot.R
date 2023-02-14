@@ -5,97 +5,36 @@ library(rmexact)
 sims_samp1 <- readRDS("./output/small/sims_samp1.RDS")
 sims_samp2 <- readRDS("./output/small/sims_samp2.RDS")
 
-#Exact pval
-ggplot(sims_samp1) +
-  geom_histogram(aes(x = exact_pval), breaks = seq(0, 1, 0.05),
-                 color = "black", fill = "grey") +
-  scale_y_continuous(expand = expansion(c(0, 0.05))) +
-  ggtitle("Exact P-value for small samples") +
+sims_samp1 %>%
+  rename(y0 = V1, y1 = V2, y2 = V3, y3 = V4, y4 = V5) %>%
+  mutate(n = 5) ->
+  sims_samp1
+
+sims_samp2 %>%
+  rename(y0 = V1, y1 = V2, y2 = V3, y3 = V4, y4 = V5) %>%
+  mutate(n = 10) ->
+  sims_samp2
+
+pardf <- bind_rows(sims_samp1, sims_samp2)
+
+pardf %>%
+  select(Exact = exact_pval,
+         LRT = like_pval,
+         `Chi-squared` = chisqr_pval,
+         SLRT = splitlrt_pval,
+         n) %>%
+  pivot_longer(cols = c("Exact", "LRT", "Chi-squared", "SLRT"),
+               names_to = "Method",
+               values_to = "P-value") %>%
+  mutate(n = str_c("n = ", n),
+         n = parse_factor(n, levels = c("n = 5", "n = 10")),
+         Method = parse_factor(Method, levels = c("LRT", "Chi-squared", "SLRT", "Exact"))) %>%
+  ggplot(aes(x = `P-value`)) +
+  geom_histogram(color = "black", fill = "grey", bins = 20) +
+  facet_wrap(Method ~ n, scales = "free", ncol = 2) +
   theme_bw() +
-  theme(strip.background = element_rect(fill = "white")) +
-  xlab("P-values") +
-  ylab("Count") -> smallexacthist1
+  theme(strip.background = element_rect(fill = "white")) ->
+  pl
 
-ggplot(sims_samp2) +
-  geom_histogram(aes(x = exact_pval), breaks = seq(0, 1, 0.05),
-                 color = "black", fill = "grey") +
-  scale_y_continuous(expand = expansion(c(0, 0.05))) +
-  ggtitle("Exact P-value for small samples") +
-  theme_bw() +
-  theme(strip.background = element_rect(fill = "white")) +
-  xlab("P-values") +
-  ylab("Count") -> smallexacthist2
+ggsave(filename = "./output/small/small_hist.pdf", plot = pl, height = 6, width = 5)
 
-#Like Pval
-ggplot(sims_samp1) +
-  geom_histogram(aes(x = like_pval), breaks = seq(0, 1, 0.05),
-                 color = "black", fill = "grey") +
-  scale_y_continuous(expand = expansion(c(0, 0.05))) +
-  ggtitle("Likelihood P-value for small samples") +
-  theme_bw() +
-  theme(strip.background = element_rect(fill = "white")) +
-  xlab("P-values") +
-  ylab("Count") -> smalllikehist1
-
-ggplot(sims_samp2) +
-  geom_histogram(aes(x = like_pval), breaks = seq(0, 1, 0.05),
-                 color = "black", fill = "grey") +
-  scale_y_continuous(expand = expansion(c(0, 0.05))) +
-  ggtitle("Likelihood P-value for small samples") +
-  theme_bw() +
-  theme(strip.background = element_rect(fill = "white")) +
-  xlab("P-values") +
-  ylab("Count") -> smalllikehist2
-
-#Chisqr
-ggplot(sims_samp1) +
-  geom_histogram(aes(x = chisqr_pval), breaks = seq(0, 1, 0.05),
-                 color = "black", fill = "grey") +
-  scale_y_continuous(expand = expansion(c(0, 0.05))) +
-  ggtitle("Chi-squared P-value for small samples") +
-  theme_bw() +
-  theme(strip.background = element_rect(fill = "white")) +
-  xlab("P-values") +
-  ylab("Count") -> smallchisqrhist1
-
-ggplot(sims_samp2) +
-  geom_histogram(aes(x = chisqr_pval), breaks = seq(0, 1, 0.05),
-                 color = "black", fill = "grey") +
-  scale_y_continuous(expand = expansion(c(0, 0.05))) +
-  ggtitle("Chi-Squared P-value for small samples") +
-  theme_bw() +
-  theme(strip.background = element_rect(fill = "white")) +
-  xlab("P-values") +
-  ylab("Count") -> smallchisqrhist2
-
-
-#Split
-ggplot(sims_samp1) +
-  geom_histogram(aes(x = splitlrt_pval), breaks = seq(0, 1, 0.05),
-                 color = "black", fill = "grey") +
-  scale_y_continuous(expand = expansion(c(0, 0.05))) +
-  ggtitle("Split Likelihood P-value for small samples") +
-  theme_bw() +
-  theme(strip.background = element_rect(fill = "white")) +
-  xlab("P-values") +
-  ylab("Count") -> smallsplitlrthist1
-
-ggplot(sims_samp2) +
-  geom_histogram(aes(x = splitlrt_pval), breaks = seq(0, 1, 0.05),
-                 color = "black", fill = "grey") +
-  scale_y_continuous(expand = expansion(c(0, 0.05))) +
-  ggtitle("Split Likelihood P-value for small samples") +
-  theme_bw() +
-  theme(strip.background = element_rect(fill = "white")) +
-  xlab("P-values") +
-  ylab("Count") -> smallsplitlrthist2
-
-#PDF
-ggsave(filename = "./output/small/smallexact1.pdf", plot = smallexacthist1, height = 6, width = 6, family = "Times")
-ggsave(filename = "./output/small/smallexact2.pdf", plot = smallexacthist2, height = 6, width = 6, family = "Times")
-ggsave(filename = "./output/small/smalllike1.pdf", plot = smalllikehist1, height = 6, width = 6, family = "Times")
-ggsave(filename = "./output/small/smalllike2.pdf", plot = smalllikehist2, height = 6, width = 6, family = "Times")
-ggsave(filename = "./output/small/smallchisqr1.pdf", plot = smallchisqrhist1, height = 6, width = 6, family = "Times")
-ggsave(filename = "./output/small/smallchisqr2.pdf", plot = smallchisqrhist2, height = 6, width = 6, family = "Times")
-ggsave(filename = "./output/small/smallsplitlrt1.pdf", plot = smallsplitlrthist1, height = 6, width = 6, family = "Times")
-ggsave(filename = "./output/small/smallsplitlrt2.pdf", plot = smallsplitlrthist2, height = 8, width = 6, family = "Times")
