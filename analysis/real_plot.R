@@ -5,6 +5,7 @@ library(tidyr)
 
 realdata <- readRDS("./output/sturg/sims_realdata.RDS")
 
+
 #Exact P-values
 realdata %>%
   ggplot(mapping = aes(sample = exact_pval)) +
@@ -64,8 +65,11 @@ realdata %>%
   ylab("Observed P-values")
   
 
-#You generate a data frame with two columns. One contains the names of the test
-#and the other one contains the p-values
+##All QQplots 
+extractedexactpval <- realdata$exact_pval 
+extractedchisqrpval <- realdata$chisqr_pval
+extractedlikelihoodpval <- realdata$like_pval
+extractedsplitlrtpval <- realdata$splitlrt_pval
 
 newtab <- expand.grid(tests = "exactpvalue",
                         values = extractedexactpval)
@@ -86,7 +90,9 @@ combinedtab %>%
    theme_bw() +
    theme(strip.background = element_rect(fill = "white")) +
    xlab("Theoretical Quantiles") +
-   ylab("Observed P-values")
+   ylab("Observed P-values") -> realdataplots
+
+ggsave(filename = "./output/sturg/realdataplots.pdf", plot = realdataplots, height = 6, width = 6, family = "Times")
 
 #Likelihood Pvalue
 paramdf0 %>%
