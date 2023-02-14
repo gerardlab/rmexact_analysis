@@ -16,7 +16,10 @@ paramdf %>%
   theme_bw() +
   theme(strip.background = element_rect(fill = "white")) +
   xlab("Theoretical Quantiles") +
-  ylab("Observed P-values") -> exactplot
+  ylab("Observed P-values") +
+  scale_x_log10() +
+  scale_y_log10() ->
+  exactplot
 
 ggsave(filename = "./output/null/exact_null.pdf", plot = exactplot, height = 6, width = 6, family = "Times")
 
@@ -32,7 +35,11 @@ paramdf %>%
   theme_bw() +
   theme(strip.background = element_rect(fill = "white")) +
   xlab("Theoretical Quantiles") +
-  ylab("Observed P-values") -> lrtplot
+  ylab("Observed P-values") +
+  scale_x_log10() +
+  scale_y_log10() ->
+  lrtplot
+
 
 ggsave(filename = "./output/null/likelihood_null.pdf", plot = lrtplot, height = 6, width = 6, family = "Times")
 
@@ -48,10 +55,12 @@ paramdf %>%
   theme_bw() +
   theme(strip.background = element_rect(fill = "white")) +
   xlab("Theoretical Quantiles") +
-  ylab("Observed P-values") -> chisqrplot
+  ylab("Observed P-values") +
+  scale_x_log10() +
+  scale_y_log10() ->
+  chisqrplot
 
 ggsave(filename = "./output/null/chi_null.pdf", plot = chisqrplot, height = 6, width = 6, family = "Times")
-
 
 #Split Likelihood Ratio Test
 paramdf %>%
@@ -65,6 +74,9 @@ paramdf %>%
   theme_bw() +
   theme(strip.background = element_rect(fill = "white")) +
   xlab("Theoretical Quantiles") +
-  ylab("Observed P-values") -> splitplot
+  ylab("Observed P-values") +
+  scale_x_log10() +
+  scale_y_log10() ->
+  splitplot
 
 ggsave(filename = "./output/null/slrt_null.pdf", plot = splitplot, height = 6, width = 6, family = "Times")
