@@ -1,12 +1,6 @@
 nc = 4
 rexec = R CMD BATCH --no-save --no-restore
 
-sturg_plots = ./output/sturg/exactdata.pdf \
-              ./output/sturg/likedata.pdf \
-              ./output/sturg/chisqrdata.pdf \
-              ./output/sturg/realdataplots.pdf\
-              ./output/sturg/splitlrtdata.pdf
-
 null_plots = ./output/null/exact_null.pdf \
              ./output/null/likelihood_null.pdf \
              ./output/null/chi_null.pdf \
@@ -23,7 +17,7 @@ all : sturg alt_sims null_sims small
 ## Real Data Analysis ----------------------------------------------
 
 .PHONY : sturg
-sturg : $(sturg_plots)
+sturg : ./output/sturg/real_qq.pdf
 
 ./data/sturg/8n_12n_sturgeon_readCounts.rda :
 	mkdir -p ./data/sturg
@@ -40,7 +34,7 @@ sturg : $(sturg_plots)
 	mkdir -p ./output/sturg
 	$(rexec) $< ./output/rout/$(basename $(notdir $<)).Rout
 
-$(sturg_plots) : ./analysis/real_plot.R ./output/sturg/sims_realdata.RDS
+./output/sturg/real_qq.pdf : ./analysis/real_plot.R ./output/sturg/sims_realdata.RDS
 	mkdir -p ./output/rout
 	mkdir -p ./output/sturg
 	$(rexec) $< ./output/rout/$(basename $(notdir $<)).Rout
