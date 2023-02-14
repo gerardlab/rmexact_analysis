@@ -4,6 +4,7 @@ rexec = R CMD BATCH --no-save --no-restore
 sturg_plots = ./output/sturg/exactdata.pdf \
               ./output/sturg/likedata.pdf \
               ./output/sturg/chisqrdata.pdf \
+              ./output/sturg/realdataplots.pdf\
               ./output/sturg/splitlrtdata.pdf
 
 null_plots = ./output/null/exact_null.pdf \

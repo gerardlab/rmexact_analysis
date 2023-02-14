@@ -40,6 +40,7 @@ paramdf %>%
   scale_y_log10() ->
   lrtplot
 
+
 ggsave(filename = "./output/null/likelihood_null.pdf", plot = lrtplot, height = 6, width = 6, family = "Times")
 
 #Chi-squared P-values
