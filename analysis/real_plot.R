@@ -19,4 +19,4 @@ realdata %>%
   ylab("Observed P-values") ->
   pl
 
-ggsave(filename = "./output/sturg/real_qq.pdf", plot = pl, height = 4, width = 4)
+ggsave(filename = "./output/sturg/real_qq.pdf", plot = pl, height = 5, width = 5)
