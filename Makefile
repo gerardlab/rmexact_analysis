@@ -62,7 +62,7 @@ $(null_plots) : ./analysis/null_plot.R ./output/null/sims_out.RDS
 ## Alt Sims Analysis ----------------------------------------------
 
 .PHONY: alt_sims
-alt_sims : $(alt_plots)
+alt_sims : $(alt_plots) ./output/alt/alt_tab.txt
 
 ./output/alt/sims_alt.RDS : ./analysis/alt_sims.R
 	mkdir -p ./output/rout
@@ -70,6 +70,11 @@ alt_sims : $(alt_plots)
 	$(rexec) $< ./output/rout/$(basename $(notdir $<)).Rout
 
 $(alt_plots) : ./analysis/alt_plot.R ./output/alt/sims_alt.RDS
+	mkdir -p ./output/rout
+	mkdir -p ./output/alt
+	$(rexec) $< ./output/rout/$(basename $(notdir $<)).Rout
+
+./output/alt/alt_tab.txt : ./analysis/alt_tab.R ./output/alt/sims_alt.RDS
 	mkdir -p ./output/rout
 	mkdir -p ./output/alt
 	$(rexec) $< ./output/rout/$(basename $(notdir $<)).Rout
