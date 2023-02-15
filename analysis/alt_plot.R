@@ -6,11 +6,11 @@ paramdf0 <- readRDS("./output/alt/sims_alt.RDS")
 #Exact pvalue
 paramdf0 %>%
   dplyr::mutate(p2 = as.character(p)) %>%
+  mutate(p2 = str_remove(p2, "^c")) %>%
   ggplot2::ggplot(mapping = aes(sample = exact_pval))+
   ggplot2::geom_qq(distribution = stats::qunif) +
   ggplot2::facet_grid(p2 ~ n) +
   ggplot2::geom_abline() +
-  ggplot2::ggtitle("Exact P-value under Alternative Hypothesis") +
   theme_bw() +
   theme(strip.background = element_rect(fill = "white")) +
   coord_cartesian(xlim = c(0.0001, 1), ylim = c(0.0001, 1)) +
@@ -22,11 +22,11 @@ ggsave(filename = "./output/alt/exact_alt.pdf", plot = exactplot2, height = 6, w
 #Likelihood Pvalue
 paramdf0 %>%
   dplyr::mutate(p2 = as.character(p)) %>%
+  mutate(p2 = str_remove(p2, "^c")) %>%
   ggplot2::ggplot(mapping = aes(sample = like_pval))+
   ggplot2::geom_qq(distribution = stats::qunif) +
   ggplot2::facet_grid(p2 ~ n) +
   ggplot2::geom_abline() +
-  ggplot2::ggtitle("Likelihood P-value under Alternative Hypothesis") +
   theme_bw() +
   theme(strip.background = element_rect(fill = "white")) +
   coord_cartesian(xlim = c(0.0001, 1), ylim = c(0.0001, 1)) +
@@ -38,11 +38,11 @@ ggsave(filename = "./output/alt/likelihood_alt.pdf", plot = lrtplot2, height = 6
 #Chi-squared P-values
 paramdf0 %>%
   dplyr::mutate(p2 = as.character(p)) %>%
+  mutate(p2 = str_remove(p2, "^c")) %>%
   ggplot(mapping = aes(sample = chisqr_pval))+
   geom_qq(distribution = stats::qunif) +
   facet_grid(p2 ~ n) +
   geom_abline() +
-  ggtitle("Chi-squared P-value under Alternative Hypothesis ") +
   theme_bw() +
   theme(strip.background = element_rect(fill = "white")) +
   coord_cartesian(xlim = c(0.0001, 1), ylim = c(0.0001, 1)) +
@@ -53,11 +53,11 @@ ggsave(filename = "./output/alt/chisqr_alt.pdf", plot = chisqrplot2, height = 6,
 #Split P-values
 paramdf0 %>%
   dplyr::mutate(p2 = as.character(p)) %>%
+  mutate(p2 = str_remove(p2, "^c")) %>%
   ggplot(mapping = aes(sample = splitlrt_pval))+
   geom_qq(distribution = stats::qunif) +
   facet_grid(p2 ~ n) +
   geom_abline() +
-  ggtitle("Split Likelihood under Alternative Hypothesis") +
   theme_bw() +
   theme(strip.background = element_rect(fill = "white")) +
   xlab("Theoretical Quantiles") +

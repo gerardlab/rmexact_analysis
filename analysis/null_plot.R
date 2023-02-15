@@ -12,7 +12,6 @@ paramdf %>%
   geom_qq(distribution = stats::qunif) +
   facet_grid(p2 ~ n) +
   geom_abline() +
-  ggtitle("Exact P-value under the Null") +
   theme_bw() +
   theme(strip.background = element_rect(fill = "white")) +
   xlab("Theoretical Quantiles") +
@@ -31,7 +30,6 @@ paramdf %>%
   geom_qq(distribution = stats::qunif) +
   facet_grid(p2 ~ n) +
   geom_abline() +
-  ggtitle("Likelihood P-value under the Null") +
   theme_bw() +
   theme(strip.background = element_rect(fill = "white")) +
   xlab("Theoretical Quantiles") +
@@ -51,7 +49,6 @@ paramdf %>%
   geom_qq(distribution = stats::qunif) +
   facet_grid(p2 ~ n) +
   geom_abline() +
-  ggtitle("Chi-squared P-value under the Null") +
   theme_bw() +
   theme(strip.background = element_rect(fill = "white")) +
   xlab("Theoretical Quantiles") +
@@ -70,7 +67,6 @@ paramdf %>%
   geom_qq(distribution = stats::qunif) +
   facet_grid(p2 ~ n) +
   geom_abline() +
-  ggtitle("Split Likelihood Ratio under the Null") +
   theme_bw() +
   theme(strip.background = element_rect(fill = "white")) +
   xlab("Theoretical Quantiles") +
