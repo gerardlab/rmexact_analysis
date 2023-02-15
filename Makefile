@@ -42,7 +42,7 @@ sturg : ./output/sturg/real_qq.pdf
 ## Null Sims Analysis ----------------------------------------------
 
 .PHONY : null_sims
-null_sims : $(null_plots)
+null_sims : $(null_plots) ./output/null/null_tab.txt
 
 ./output/null/sims_out.RDS ./output/null/sims_outtype1.RDS : ./analysis/null_sims.R
 	mkdir -p ./output/rout
@@ -50,6 +50,11 @@ null_sims : $(null_plots)
 	$(rexec) $< ./output/rout/$(basename $(notdir $<)).Rout
 
 $(null_plots) : ./analysis/null_plot.R ./output/null/sims_out.RDS
+	mkdir -p ./output/rout
+	mkdir -p ./output/null
+	$(rexec) $< ./output/rout/$(basename $(notdir $<)).Rout
+
+./output/null/null_tab.txt : ./analysis/null_tab.R ./output/null/sims_out.RDS
 	mkdir -p ./output/rout
 	mkdir -p ./output/null
 	$(rexec) $< ./output/rout/$(basename $(notdir $<)).Rout
