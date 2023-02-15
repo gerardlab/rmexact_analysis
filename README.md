@@ -1,4 +1,4 @@
-# Code and Analysis for "Exact Tests for Random Mating in Autopolyploids"
+# Code and Analysis for the master's thesis "Exact Tests for Random Mating in Autotetraploids" by Karene C. Matoka Nana
 
 To reproduce the results of the thesis:
 
