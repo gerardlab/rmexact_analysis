@@ -5,7 +5,7 @@ plist <- list(rep(0.2, 5),
 
 
 nvec <- c(10, 100, 1000)
-seedvec <- seq_len(100)
+seedvec <- seq_len(1000)
 paramdf0 <- expand.grid(p = plist,
                        n = nvec,
                        seed = seedvec)
