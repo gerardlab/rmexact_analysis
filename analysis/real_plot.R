@@ -15,8 +15,8 @@ realdata %>%
   facet_wrap(.~Method) +
   theme_bw() +
   theme(strip.background = element_rect(fill = "white")) +
+  theme(text = element_text(size = 17)) + 
   xlab("Theoretical Quantiles") +
-  ylab("Observed P-values") ->
-  pl
+  ylab("Observed P-values") -> pl
 
 ggsave(filename = "./output/sturg/real_qq.pdf", plot = pl, height = 5, width = 5)
